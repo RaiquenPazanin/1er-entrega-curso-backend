@@ -96,12 +96,23 @@ const deletCartById = (req, res) =>{
 const getAllProductByIdCart = (req, res) =>{
     const idGet = Number(req.params.id)
     const getCart = carts.filter((item) => item.id === idGet)
-    const showProduct = getCart.getAllProductByIdCart.filter((item) =>item===productos.id)
+    const showProduct = []
+
+    getCart.forEach(idInCar => {
+        productos.forEach(element => {
+            if(idInCar==element.id){
+                showProduct.push(element)
+            }
+        });
+    });
     return(showProduct) 
 }
 const postProductInCart = (req, res) =>{
-
-}
+    const idCar = Number(req.params.id)
+    const idProduct = Number(req.body.id)
+    const carById = carts.filter((item) => item.id ===idCar)
+    carById.postProductById(idProduct)
+    
 
 
 export {getProductController, getProductByIdController, postProductController, putProducByIdtController, deletProductById, postCartController, deletCartById, getAllProductByIdCart, postProductInCart}
