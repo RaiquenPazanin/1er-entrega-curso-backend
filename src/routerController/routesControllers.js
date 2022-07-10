@@ -112,7 +112,7 @@ const postProductInCart = (req, res) =>{
     const idProduct = Number(req.body.id)
     const carById = carts.filter((item) => item.id ===idCar)
     carById.postProductById(idProduct)
-    
+}  
 
 
 export {getProductController, getProductByIdController, postProductController, putProducByIdtController, deletProductById, postCartController, deletCartById, getAllProductByIdCart, postProductInCart}
