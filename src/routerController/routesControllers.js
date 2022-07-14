@@ -88,31 +88,36 @@ const deletCartById = (req, res) =>{
             carts[index].id = index + 1;
         }
         res.sendStatus(201)
-
-        console.log(carts.length)
 }}
 
 
 const getAllProductByIdCart = (req, res) =>{
     const idGet = Number(req.params.id)
-    const getCart = carts.filter((item) => item.id === idGet)
     const showProduct = []
 
-    getCart.forEach(idInCar => {
-        productos.forEach(element => {
-            if(idInCar==element.id){
-                showProduct.push(element)
-            }
-        });
-    });
-    return(showProduct) 
+    carts.map((item) => {
+        if(item.getMyId() === idGet){
+            item.cartGetAllProduts().forEach(idInCar => {
+                productos.forEach(element => {
+                    if(idInCar==element.id){
+                        showProduct.push(element)
+                    }
+                });
+            });
+        }
+    }) 
+    res.status(200).json(showProduct) 
 }
 const postProductInCart = (req, res) =>{
     const idCar = Number(req.params.id)
     const idProduct = Number(req.body.id)
-    const carById = carts.filter((item) => item.id ===idCar)
-    carById.postProductById(idProduct)
-}  
+    carts.map((item => {
+        if (item.getMyId() === idCar){
+            item.postProductById(idProduct)
+        }
+    }))
+    res.sendStatus(201)
+}
 
 
 export {getProductController, getProductByIdController, postProductController, putProducByIdtController, deletProductById, postCartController, deletCartById, getAllProductByIdCart, postProductInCart}
