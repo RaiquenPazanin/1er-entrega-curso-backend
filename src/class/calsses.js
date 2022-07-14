@@ -29,7 +29,11 @@ class Product{
 class Cart{
     constructor(idCart){
         this.id = idCart,
-        this.arrayMyProducts
+        this.arrayMyProducts=[]
+    }
+
+    getMyId(){
+        return(this.id)
     }
 
     cartAddProduct(newProduct){
@@ -45,7 +49,7 @@ class Cart{
     }
 
     postProductById(idProduct){
-        
+        this.arrayMyProducts.push(idProduct)
     }
 }
 
